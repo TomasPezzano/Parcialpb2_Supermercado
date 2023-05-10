@@ -1,5 +1,68 @@
 package ar.edu.unlam.pb;
 
-public class Gondolas {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
+public class Gondolas {
+	private Integer id;
+	private ArrayList<Producto> productos;	
+	public Gondolas(){
+		this.id = id;
+		productos = new ArrayList<Producto>();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public ArrayList<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(ArrayList<Producto> productos) {
+		this.productos = productos;
+	}
+	
+	  public void agregarProducto(Producto producto) {
+	        productos.add(producto);
+	    }
+	
+	public static int recuentoDeProductos(ArrayList<Producto> productos){
+		int contador = 0;
+		
+		for(Producto gondola : productos) {
+			contador++;
+		}
+		
+		return contador;
+		
+	}
+    public int obtenerCantidadProductos() {
+        return recuentoDeProductos(productos);
+    }
+    
+	public void ordenarProductosPorCategoria() {
+        Collections.sort(productos, new Comparator<Producto>() {
+            @Override
+            public int compare(Producto primerProducto, Producto segundoProducto) {
+                return primerProducto.getCategoria().compareTo(segundoProducto.getCategoria());
+            }
+        });
+    }
+
+    public static int contarProductosEnTodasLasGondolas(ArrayList<Gondolas> gondolas) {
+        int cantidadTotal = 0;
+        
+        for (Gondolas gondola : gondolas) {
+            cantidadTotal += gondola.obtenerCantidadProductos();
+        }
+
+        return cantidadTotal;
+    }
+	
 }

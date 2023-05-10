@@ -375,9 +375,70 @@ public class Prueba {
 	}
 
 	@Test
-	public void queElClientePuedaComprarUnProducto() {
+	public void queElClientePuedaComprarUnProducto(){
+		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
+		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
+		Compra compraActual = new Compra();
+		Producto productoActual = new Producto(50.0);
+				
+		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
+		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
+	
+	@Test
+	public void queSePuedaHacerUnRecuentoDeUnaGondola(){
+		int cantidadDeProductos = 3;
+		ArrayList<Producto> gondola = new ArrayList<>();
+        gondola.add(new Producto());
+        gondola.add(new Producto());
+        gondola.add(new Producto());
+        
+        int resultado = Gondolas.recuentoDeProductos(gondola);
+        assertEquals(cantidadDeProductos, resultado);
+		
+	}
+	
+	@Test
+	public void queSeRealiceUnRecuentoDeProductosDeTodasLasGondola() {
+		int cantidadTotal = 6;
+		
+		Gondolas gondola1 = new Gondolas();
+		Gondolas gondola2 = new Gondolas();
+		Gondolas gondola3 = new Gondolas();
+		
+		gondola1.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		
+		ArrayList<Gondolas> gondolas = new ArrayList<>();
+		gondolas.add(gondola1);
+		gondolas.add(gondola2);
+		gondolas.add(gondola3);
+		
+		int gondolasCantidadTotal = Gondolas.contarProductosEnTodasLasGondolas(gondolas);
+		
+		assertEquals(cantidadTotal, gondolasCantidadTotal);
+	}
+	
+	@Test
+	public void ordenarProductosSegunCategoriaEnMismaGondola(){
+		Gondolas gondolaActual = new Gondolas();
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
 
+		gondolaActual.ordenarProductosPorCategoria();
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(0).getCategoria());
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(1).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(2).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(3).getCategoria());
+		 
+	}
+	
 	@Test
 	public void queSePuedaDarUnVuelto() {
 		String Nombre = "Juan";
