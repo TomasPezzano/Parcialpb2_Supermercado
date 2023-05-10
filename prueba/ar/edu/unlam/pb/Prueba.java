@@ -485,8 +485,7 @@ public class Prueba {
 
 		Double valorEsperado = 90.0;
 
-		assertEquals(valorEsperado,
-				compra.queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe10Porciento(miembro, producto));
+		assertEquals(valorEsperado,compra.queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe10Porciento(miembro, producto));
 	}
 
 	@Test
@@ -497,8 +496,7 @@ public class Prueba {
 
 		Double valorEsperado = 60.0;
 
-		assertEquals(valorEsperado,
-				compra.queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(miembro, producto));
+		assertEquals(valorEsperado,compra.queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(miembro, producto));
 	}
 
 
@@ -573,7 +571,8 @@ public class Prueba {
 		
 		assertTrue(compra.validarLaPromocion3X2(productos));
 	}
-		
+	
+	
 			
 		
 	
