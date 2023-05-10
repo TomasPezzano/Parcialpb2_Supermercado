@@ -228,13 +228,19 @@ public class Prueba {
 	}
 
 	@Test
+	public void queSeCreeUnMiembroBasico() {
+		MiembroBasico miembro= new MiembroBasico("lucas","",45487987,100.0);
+	}
+	
+	@Test
 	public void queSeCreeUnMiembro() {
-
+		MiembroPremium miembro= new MiembroPremium("marcos","",35757987,900.0);
 	}
 
 	@Test
 	public void queSeCreeUnProducto() {
-
+		Producto producto = new Producto();
+		assertNotNull(producto);
 	}
 
 	@Test
@@ -244,17 +250,19 @@ public class Prueba {
 
 	@Test
 	public void queSeCreeUnDistribuidor() {
-
+		
 	}
 
 	@Test
 	public void queSeCreeUnaCaja() {
-
+		Caja caja = new Caja();
+		assertNotNull(caja);
 	}
 
 	@Test
 	public void queSeCreeUnaCompra() {
-
+		Compra compra = new Compra();
+		assertNotNull(compra);
 	}
 
 	@Test
