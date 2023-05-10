@@ -8,14 +8,16 @@ public class Empleado {
 	private Integer Sueldo;
 	private Integer cantidadDeFaltas;
 	private Integer cantidadDeAdvertencias;
-	
+	private Integer cantidadDeDineroEnCuentaSueldo;
+
 	public Empleado(String Nombre, String Dni, Integer Sueldo) {
 		if(validarDni(Dni)) {
 			this.Dni=Dni;
 			this.Nombre=Nombre;
 			this.Sueldo=Sueldo;
 			cantidadDeFaltas=0;
-			cantidadDeAdvertencias=0;		
+			cantidadDeAdvertencias=0;	
+			cantidadDeDineroEnCuentaSueldo=0;
 	}
 	else throw new IllegalArgumentException("El DNI ingresado no es válido");
 	}
@@ -24,8 +26,6 @@ public class Empleado {
 	public int hashCode() {
 		return Objects.hash(Dni);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -79,6 +79,18 @@ public class Empleado {
 
 	public void setCantidadDeAdvertencias(Integer cantidadDeAdvertencias) {
 		this.cantidadDeAdvertencias = cantidadDeAdvertencias;
+	}
+	
+	public Integer getCantidadDeDineroEnCuentaSueldo() {
+		return cantidadDeDineroEnCuentaSueldo;
+	}
+
+	public void setCantidadDeDineroEnCuentaSueldo(Integer cantidadDeDineroEnCuentaSueldo) {
+		this.cantidadDeDineroEnCuentaSueldo = cantidadDeDineroEnCuentaSueldo;
+	}
+	
+	public int calcularAguinaldo() {
+		return Sueldo/2;
 	}
 	
 	public boolean validarDni(String dni) {
