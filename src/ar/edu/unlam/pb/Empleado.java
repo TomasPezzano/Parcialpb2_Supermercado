@@ -10,11 +10,14 @@ public class Empleado {
 	private Integer cantidadDeAdvertencias;
 	
 	public Empleado(String Nombre, String Dni, Integer Sueldo) {
+		if(validarDni(Dni)) {
 			this.Dni=Dni;
 			this.Nombre=Nombre;
 			this.Sueldo=Sueldo;
 			cantidadDeFaltas=0;
 			cantidadDeAdvertencias=0;		
+	}
+	else throw new IllegalArgumentException("El DNI ingresado no es válido");
 	}
 	
 	@Override
@@ -76,6 +79,15 @@ public class Empleado {
 
 	public void setCantidadDeAdvertencias(Integer cantidadDeAdvertencias) {
 		this.cantidadDeAdvertencias = cantidadDeAdvertencias;
+	}
+	
+	public boolean validarDni(String dni) {
+		boolean sePudoValidar=false;
+		if(dni.length()==8) {
+			sePudoValidar = true;
+		}
+		
+		return sePudoValidar;
 	}
 
 }

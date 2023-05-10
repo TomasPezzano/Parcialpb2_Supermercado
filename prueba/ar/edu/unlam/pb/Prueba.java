@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import supermercado.dominio.Empleado;
+
 
 
 public class Prueba {
@@ -96,10 +98,15 @@ public class Prueba {
 		
 	}
 	
-	@Test 
-	public void queNoSePuedaCrearUnEmpleadoConUnDniQueNoTenga8Digitos() {
 	
-	}
+		@Test (expected = IllegalArgumentException.class)
+		 	public void queNoSePuedaCrearUnEmpleadoConUnDniQueNoTenga8Digitos() {
+			String Nombre = "Juan";
+			String Dni = "874213";
+			Integer Sueldo = 100000;
+			Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		}
+	
 	
 	@Test
 	public void queSeCreeUnaCaja() {
