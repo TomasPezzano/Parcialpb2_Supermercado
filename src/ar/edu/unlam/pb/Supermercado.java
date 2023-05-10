@@ -2,8 +2,6 @@ package ar.edu.unlam.pb;
 
 import java.util.HashSet;
 
-
-
 public class Supermercado {
 	
 	private String Nombre;
