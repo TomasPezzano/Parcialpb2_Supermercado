@@ -46,6 +46,17 @@ public class Gondolas {
         return recuentoDeProductos(productos);
     }
     
+	public static int sumaDelPrecioDeLosProductos(ArrayList<Producto> productos){
+		int precioTotal = 0;
+		
+		for(Producto gondola : productos) {
+			precioTotal += gondola.getPrecio();
+		}
+		
+		return precioTotal;
+		
+	}
+    
 	public void ordenarProductosPorCategoria() {
         Collections.sort(productos, new Comparator<Producto>() {
             @Override

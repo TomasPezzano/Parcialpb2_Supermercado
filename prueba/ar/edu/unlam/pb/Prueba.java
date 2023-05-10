@@ -378,12 +378,25 @@ public class Prueba {
 	public void queElClientePuedaComprarUnProducto(){
 		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
 		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
-		Compra compraActual = new Compra();
 		Producto productoActual = new Producto(50.0);
 				
 		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
 		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
+	
+	@Test
+	public void queSeSumeElPrecioDeTodosLosProductos() {
+		double precioFinalActual = 93.0;
+		ArrayList<Producto> gondola = new ArrayList<>();
+        gondola.add(new Producto(50.0));
+        gondola.add(new Producto(32.0));
+        gondola.add(new Producto(11.0));
+        
+        double precioFinalPrueba = Gondolas.sumaDelPrecioDeLosProductos(gondola);
+        
+		assertEquals(precioFinalPrueba, precioFinalActual, 0);
+	}
+
 	
 	@Test
 	public void queSePuedaHacerUnRecuentoDeUnaGondola(){

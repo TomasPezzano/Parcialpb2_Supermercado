@@ -54,10 +54,6 @@ public class Producto {
 			this.tipoDePromocion = tipoDePromocion;
 			
 		}
-
-		public Categoria getCategoria() {
-			return categoria;
-		}
 		
 	}
 
