@@ -6,12 +6,7 @@ import org.junit.Test;
 
 
 public class Prueba {
-	
-	@Test
-	public void queSePuedaCrearUnSupermercado() {
-		
-	}
-	
+
 	@Test
 	public void queSeCreeElSupermercado() {
 		
