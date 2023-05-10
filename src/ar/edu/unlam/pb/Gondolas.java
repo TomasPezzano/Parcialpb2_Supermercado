@@ -75,5 +75,14 @@ public class Gondolas {
 
         return cantidadTotal;
     }
-	
+    
+    public boolean descontarProductoDeLaGondola(Producto producto) {
+        if (productos.contains(producto)) {
+            productos.remove(producto);
+            return true;
+        }
+        else {
+        	return false;
+        }
+    }
 }

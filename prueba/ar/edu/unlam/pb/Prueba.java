@@ -437,7 +437,7 @@ public class Prueba {
 	}
 	
 	@Test
-	public void ordenarProductosSegunCategoriaEnMismaGondola(){
+	public void queSePuedaOrdenarProductosSegunCategoriaEnMismaGondola(){
 		Gondolas gondolaActual = new Gondolas();
 	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
 	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
@@ -451,6 +451,25 @@ public class Prueba {
 		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(3).getCategoria());
 		 
 	}
+	
+	@Test
+	public void queCuandoSeCompreUnProductoEsteSeDescuenteDeLaGondola(){
+		int cantidadDeProductosFinal = 2;
+		Gondolas gondola = new Gondolas();
+		MiembroBasico miembro = new MiembroBasico(null, null, 0, 26.0);
+		
+		gondola.agregarProducto(new Producto(50.0));
+		gondola.agregarProducto(new Producto(25.0));
+		gondola.agregarProducto(new Producto(10.0));
+				
+		Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1));
+		assertTrue(Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1)));
+
+		gondola.descontarProductoDeLaGondola(gondola.getProductos().get(1));
+        assertEquals(cantidadDeProductosFinal, gondola.obtenerCantidadProductos());
+
+	}
+	
 	
 	@Test
 	public void queSePuedaDarUnVuelto() {
