@@ -134,33 +134,56 @@ public class Prueba {
 	@Test
 	public void queSePuedaHacerUnRecuentoDeUnaGondola(){
 		int cantidadDeProductos = 3;
-		ArrayList<Producto> productos = new ArrayList<>();
-        productos.add(new Producto());
-        productos.add(new Producto());
-        productos.add(new Producto());
+		ArrayList<Producto> gondola = new ArrayList<>();
+        gondola.add(new Producto());
+        gondola.add(new Producto());
+        gondola.add(new Producto());
         
-        int resultado = Gondolas.recuentoDeProductos(productos);
+        int resultado = Gondolas.recuentoDeProductos(gondola);
         assertEquals(cantidadDeProductos, resultado);
 		
 	}
 	
 	@Test
+	public void queSeRealiceUnRecuentoDeProductosDeTodasLasGondola() {
+		int cantidadTotal = 6;
+		
+		Gondolas gondola1 = new Gondolas();
+		Gondolas gondola2 = new Gondolas();
+		Gondolas gondola3 = new Gondolas();
+		
+		gondola1.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		
+		ArrayList<Gondolas> gondolas = new ArrayList<>();
+		gondolas.add(gondola1);
+		gondolas.add(gondola2);
+		gondolas.add(gondola3);
+		
+		int gondolasCantidadTotal = Gondolas.contarProductosEnTodasLasGondolas(gondolas);
+		
+		assertEquals(cantidadTotal, gondolasCantidadTotal);
+	}
+	
+	@Test
 	public void ordenarProductosSegunCategoriaEnMismaGondola(){
-		Gondolas gondolaActual = new Gondolas(5);
+		Gondolas gondolaActual = new Gondolas();
 	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
 	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
 	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
 	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
 
 		gondolaActual.ordenarProductosPorCategoria();
-		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(0).getCategoria());
-		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(1).getCategoria());
-		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(2).getCategoria());
-		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(3).getCategoria());
-
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(0).getCategoria());
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(1).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(2).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(3).getCategoria());
 		 
 	}
-	
 	
 	@Test
 	public void queSePuedaDarUnVuelto() {

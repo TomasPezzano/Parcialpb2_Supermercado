@@ -6,11 +6,8 @@ import java.util.Comparator;
 
 public class Gondolas {
 	private Integer id;
-	private ArrayList<Producto> productos;
-	private final Integer CANTIDAD_MAXIMA_DE_PRODUCTOS;
-	
-	public Gondolas(Integer CANTIDAD_MAXIMA_DE_PRODUCTOS){
-		this.CANTIDAD_MAXIMA_DE_PRODUCTOS = CANTIDAD_MAXIMA_DE_PRODUCTOS;
+	private ArrayList<Producto> productos;	
+	public Gondolas(){
 		this.id = id;
 		productos = new ArrayList<Producto>();
 	}
@@ -30,10 +27,6 @@ public class Gondolas {
 	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
-
-	public Integer getCANTIDAD_MAXIMA_DE_PRODUCTOS() {
-		return CANTIDAD_MAXIMA_DE_PRODUCTOS;
-	}
 	
 	  public void agregarProducto(Producto producto) {
 	        productos.add(producto);
@@ -42,14 +35,17 @@ public class Gondolas {
 	public static int recuentoDeProductos(ArrayList<Producto> productos){
 		int contador = 0;
 		
-		for(Producto producto : productos) {
+		for(Producto gondola : productos) {
 			contador++;
 		}
 		
 		return contador;
 		
 	}
-	
+    public int obtenerCantidadProductos() {
+        return recuentoDeProductos(productos);
+    }
+    
 	public void ordenarProductosPorCategoria() {
         Collections.sort(productos, new Comparator<Producto>() {
             @Override
@@ -57,6 +53,16 @@ public class Gondolas {
                 return primerProducto.getCategoria().compareTo(segundoProducto.getCategoria());
             }
         });
+    }
+
+    public static int contarProductosEnTodasLasGondolas(ArrayList<Gondolas> gondolas) {
+        int cantidadTotal = 0;
+        
+        for (Gondolas gondola : gondolas) {
+            cantidadTotal += gondola.obtenerCantidadProductos();
+        }
+
+        return cantidadTotal;
     }
 	
 }

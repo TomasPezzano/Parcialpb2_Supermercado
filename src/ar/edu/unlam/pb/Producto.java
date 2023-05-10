@@ -59,8 +59,8 @@ public class Producto {
 				break;
 			}
 		}
-		public Integer getCategoria() {
-			return null;
+		public Categoria getCategoria() {
+			return categoria;
 		}
 		
 		
