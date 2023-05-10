@@ -25,8 +25,6 @@ public class Empleado {
 		return Objects.hash(Dni);
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -79,6 +77,10 @@ public class Empleado {
 
 	public void setCantidadDeAdvertencias(Integer cantidadDeAdvertencias) {
 		this.cantidadDeAdvertencias = cantidadDeAdvertencias;
+	}
+	
+	public int calcularAguinaldo() {
+		return Sueldo*6;
 	}
 	
 	public boolean validarDni(String dni) {
