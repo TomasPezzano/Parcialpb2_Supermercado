@@ -2,10 +2,6 @@ package ar.edu.unlam.pb;
 
 import java.util.ArrayList;
 
-import supermercado.dominio.Miembro;
-import supermercado.dominio.Producto;
-
-
 public class Compra {
 
 	private Caja caja;
