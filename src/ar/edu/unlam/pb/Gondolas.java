@@ -33,5 +33,14 @@ public class Gondolas {
 		return CANTIDAD_MAXIMA_DE_PRODUCTOS;
 	}
 
-	
+	public static int recuentoDeProductos(ArrayList<Producto> productos){
+		int contador = 0;
+		
+		for(Producto producto : productos) {
+			contador++;
+		}
+		
+		return contador;
+		
+	}
 }

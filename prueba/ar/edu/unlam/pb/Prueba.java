@@ -2,6 +2,8 @@ package ar.edu.unlam.pb;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import supermercado.dominio.Empleado;
@@ -128,6 +130,20 @@ public class Prueba {
 		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
 		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
+	
+	@Test
+	public void queSePuedaHacerUnRecuentoDeUnaGondola(){
+		int cantidadDeProductos = 3;
+		ArrayList<Producto> productos = new ArrayList<>();
+        productos.add(new Producto());
+        productos.add(new Producto());
+        productos.add(new Producto());
+        
+        int resultado = Gondolas.recuentoDeProductos(productos);
+        assertEquals(cantidadDeProductos, resultado);
+		
+	}
+	
 	
 	
 	@Test
