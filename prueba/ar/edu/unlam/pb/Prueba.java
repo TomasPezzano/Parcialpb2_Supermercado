@@ -2,6 +2,8 @@ package ar.edu.unlam.pb;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -209,6 +211,26 @@ public class Prueba {
 				.buscarEmpleadoPorCantidadDeAdvertencias(cantidadDeAdvertencias);
 		assertTrue(listaDeResultados.contains(empleado) && listaDeResultados.contains(empleado2));
 	}
+	
+	@Test
+	public void queSePuedaCalcularLosSueldosDeUnMes() {
+		Supermercado supermercado = new Supermercado();
+		String Nombre = "Apu";
+		String Dni = "35012345";
+		Integer Sueldo = 100000;
+		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		
+		String Dni2 = "28345987";
+		Empleado empleado2 = new Empleado(Nombre, Dni2, Sueldo);
+
+		supermercado.agregarEmpleado(empleado2);
+		supermercado.agregarEmpleado(empleado);
+		
+		Month Mes = Month.FEBRUARY;
+		Integer resultadoEsperado = 200000;
+		assertEquals(resultadoEsperado, supermercado.calcularLosSueldosDeUnMes(Mes));
+		
+	}
 
 	@Test
 	public void queSePuedaCalcularElAguinaldoDeUnEmpleado() {
@@ -217,14 +239,101 @@ public class Prueba {
 		Integer Sueldo = 100000;
 		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
 
-		int valorEsperado = 600000;
+		int valorEsperado = 50000;
 
 		assertEquals(valorEsperado, empleado.calcularAguinaldo());
 	}
+	
+	@Test
+	public void queSePuedaCalcularLosSueldosDeUnMesConAguinaldos() {
+		Supermercado supermercado = new Supermercado();
+		String Nombre = "Apu";
+		String Dni = "35012345";
+		Integer Sueldo = 100000;
+		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		
+		String Dni2 = "28345987";
+		Empleado empleado2 = new Empleado(Nombre, Dni2, Sueldo);
+
+		supermercado.agregarEmpleado(empleado2);
+		supermercado.agregarEmpleado(empleado);
+		
+		Month Mes = Month.DECEMBER;
+		Integer resultadoEsperado = 300000;
+		assertEquals(resultadoEsperado, supermercado.calcularLosSueldosDeUnMes(Mes));
+		
+	}
 
 	@Test
-	public void queSePuedaDepositarALosEmpleados() {
+	public void queSePuedaDepositarLosSueldoDeUnMes() {
+		Supermercado supermercado = new Supermercado();
+		String Nombre = "Apu";
+		String Dni = "35012345";
+		Integer Sueldo = 100000;
+		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		
+		String Dni2 = "28345987";
+		Empleado empleado2 = new Empleado(Nombre, Dni2, Sueldo);
 
+		supermercado.agregarEmpleado(empleado2);
+		supermercado.agregarEmpleado(empleado);
+		Month Mes = Month.APRIL;
+		supermercado.setCantidadDeDineroEnCuenta(supermercado.calcularLosSueldosDeUnMes(Mes));
+		Integer cantidadDeDineroEsperadoDespuesDePagar = 0;
+		
+		supermercado.pagarLosSueldos(Mes);
+		
+		assertEquals(cantidadDeDineroEsperadoDespuesDePagar, supermercado.getCantidadDeDineroEnCuenta());
+		assertEquals(Sueldo, empleado.getCantidadDeDineroEnCuentaSueldo());
+		assertEquals(Sueldo, empleado2.getCantidadDeDineroEnCuentaSueldo());
+		
+	}
+	
+	@Test
+	public void queSePuedaDepositarLosSueldoDeUnMesConAguinaldos() {
+		Supermercado supermercado = new Supermercado();
+		String Nombre = "Apu";
+		String Dni = "35012345";
+		Integer Sueldo = 100000;
+		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		
+		String Dni2 = "28345987";
+		Integer Sueldo2 = 200000;
+		Empleado empleado2 = new Empleado(Nombre, Dni2, Sueldo2);
+
+		supermercado.agregarEmpleado(empleado2);
+		supermercado.agregarEmpleado(empleado);
+		Month Mes = Month.DECEMBER;
+		supermercado.setCantidadDeDineroEnCuenta(supermercado.calcularLosSueldosDeUnMes(Mes));
+		Integer cantidadDeDineroEsperadoDespuesDePagar = 0;
+		Integer cantidadQueDeberiaCobrarEmpleado = Sueldo + empleado.calcularAguinaldo();
+		Integer cantidadQueDeberiaCobrarEmpleado2 = Sueldo2 + empleado2.calcularAguinaldo();
+		
+		supermercado.pagarLosSueldos(Mes);
+		
+		assertEquals(cantidadDeDineroEsperadoDespuesDePagar, supermercado.getCantidadDeDineroEnCuenta());
+		assertEquals(cantidadQueDeberiaCobrarEmpleado, empleado.getCantidadDeDineroEnCuentaSueldo());
+		assertEquals(cantidadQueDeberiaCobrarEmpleado2, empleado2.getCantidadDeDineroEnCuentaSueldo());
+		
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void queNoSePuedaPagarDosVecesLosSueldosDeUnMismoMes(){
+		Supermercado supermercado = new Supermercado();
+		String Nombre = "Apu";
+		String Dni = "35012345";
+		Integer Sueldo = 100000;
+		Empleado empleado = new Empleado(Nombre, Dni, Sueldo);
+		
+		String Dni2 = "28345987";
+		Empleado empleado2 = new Empleado(Nombre, Dni2, Sueldo);
+
+		supermercado.agregarEmpleado(empleado2);
+		supermercado.agregarEmpleado(empleado);
+		Month Mes = Month.APRIL;
+		supermercado.setCantidadDeDineroEnCuenta(supermercado.calcularLosSueldosDeUnMes(Mes));
+		supermercado.pagarLosSueldos(Mes);
+		supermercado.pagarLosSueldos(Mes);
 	}
 
 	@Test
@@ -266,9 +375,70 @@ public class Prueba {
 	}
 
 	@Test
-	public void queElClientePuedaComprarUnProducto() {
+	public void queElClientePuedaComprarUnProducto(){
+		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
+		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
+		Compra compraActual = new Compra();
+		Producto productoActual = new Producto(50.0);
+				
+		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
+		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
+	
+	@Test
+	public void queSePuedaHacerUnRecuentoDeUnaGondola(){
+		int cantidadDeProductos = 3;
+		ArrayList<Producto> gondola = new ArrayList<>();
+        gondola.add(new Producto());
+        gondola.add(new Producto());
+        gondola.add(new Producto());
+        
+        int resultado = Gondolas.recuentoDeProductos(gondola);
+        assertEquals(cantidadDeProductos, resultado);
+		
+	}
+	
+	@Test
+	public void queSeRealiceUnRecuentoDeProductosDeTodasLasGondola() {
+		int cantidadTotal = 6;
+		
+		Gondolas gondola1 = new Gondolas();
+		Gondolas gondola2 = new Gondolas();
+		Gondolas gondola3 = new Gondolas();
+		
+		gondola1.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola2.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		gondola3.agregarProducto(new Producto());
+		
+		ArrayList<Gondolas> gondolas = new ArrayList<>();
+		gondolas.add(gondola1);
+		gondolas.add(gondola2);
+		gondolas.add(gondola3);
+		
+		int gondolasCantidadTotal = Gondolas.contarProductosEnTodasLasGondolas(gondolas);
+		
+		assertEquals(cantidadTotal, gondolasCantidadTotal);
+	}
+	
+	@Test
+	public void ordenarProductosSegunCategoriaEnMismaGondola(){
+		Gondolas gondolaActual = new Gondolas();
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
 
+		gondolaActual.ordenarProductosPorCategoria();
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(0).getCategoria());
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(1).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(2).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(3).getCategoria());
+		 
+	}
+	
 	@Test
 	public void queSePuedaDarUnVuelto() {
 		String Nombre = "Juan";

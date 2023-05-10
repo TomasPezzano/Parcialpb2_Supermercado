@@ -96,21 +96,4 @@ public class Compra {
 		return true;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-
-	
-	
-	
-	
 }
