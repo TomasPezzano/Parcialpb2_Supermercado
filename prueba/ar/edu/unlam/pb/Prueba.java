@@ -154,10 +154,23 @@ public class Prueba {
 		Producto producto = new Producto(100.0);
 		Compra compra=new Compra();
 		
-		Double valorEsperado= 80.0;
+		Double valorEsperado= 90.0;
 		
-		assertEquals(valorEsperado, compra.queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe20Porciento(miembro, producto));
+		assertEquals(valorEsperado, compra.queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe10Porciento(miembro, producto));
 	}
+	
+	
+	@Test
+	public void queSePuedaHacerDescuentoPorSerMiembroPremium() {
+		MiembroPremium miembro = new MiembroPremium("", "", 0, 100.0);
+		Producto producto = new Producto(100.0);
+		Compra compra=new Compra();
+		
+		Double valorEsperado= 60.0;
+		
+		assertEquals(valorEsperado, compra.queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(miembro, producto));
+	}
+	
 	
 
 }
