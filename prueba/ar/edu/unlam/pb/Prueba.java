@@ -120,6 +120,13 @@ public class Prueba {
 	
 	@Test
 	public void queElClientePuedaComprarUnProducto(){
+		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
+		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
+		Compra compraActual = new Compra();
+		Producto productoActual = new Producto(50.0);
+				
+		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
+		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
 	
 	
