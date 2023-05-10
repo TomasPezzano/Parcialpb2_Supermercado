@@ -41,11 +41,21 @@ public class Compra {
 		return vuelto;
 	}
 	
-	public Double queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe20Porciento(Miembro miembro,Producto producto){
+	public Double queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe10Porciento(MiembroBasico miembro,Producto producto){
 		Double precioFinal=0.0;
-		Double descuentoInicial=20.0;
-		if(miembro.getTARJETA_MIEMBRO()) {
+		Double descuentoInicial=10.0;
+		if(!miembro.getMiembroPremium()) {
 			Double descuento=descuentoInicial% producto.getPrecio();
+			 precioFinal= producto.getPrecio()-descuento;
+		}
+		return precioFinal;
+	}
+	
+	public Double queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(MiembroPremium miembro,Producto producto){
+		Double precioFinal=0.0;
+		Double descuentoInicial=40.0;
+		if(miembro.getMiembroPremium()) {
+			Double descuento=descuentoInicial % producto.getPrecio();
 			 precioFinal= producto.getPrecio()-descuento;
 		}
 		return precioFinal;
