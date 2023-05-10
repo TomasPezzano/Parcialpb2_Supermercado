@@ -2,11 +2,8 @@ package ar.edu.unlam.pb;
 
 import static org.junit.Assert.*;
 
-<<<<<<< HEAD
-=======
 import java.time.LocalDate;
 import java.time.Month;
->>>>>>> main
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -378,7 +375,6 @@ public class Prueba {
 	}
 
 	@Test
-<<<<<<< HEAD
 	public void queElClientePuedaComprarUnProducto(){
 		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
 		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
@@ -443,11 +439,6 @@ public class Prueba {
 		 
 	}
 	
-=======
-	public void queElClientePuedaComprarUnProducto() {
-	}
-
->>>>>>> main
 	@Test
 	public void queSePuedaDarUnVuelto() {
 		String Nombre = "Juan";
