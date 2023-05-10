@@ -37,13 +37,9 @@ public class Producto {
 			return precio;
 		}
 
-
 		public void setPrecio(Double precio) {
 			this.precio = precio;
 		}
-		
-		
-		
 		
 		public Categoria getCategoria() {
 			return categoria;
@@ -58,13 +54,6 @@ public class Producto {
 			this.tipoDePromocion = tipoDePromocion;
 			
 		}
-		
-		
-		
-		
-		
-	
-		
-		
+
 	}
 
