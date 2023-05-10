@@ -13,5 +13,7 @@ public class Prueba {
 		Supermercado supermercado= new Supermercado();
 		assertNotNull(supermercado);
 	}
+	
+	
 
 }
