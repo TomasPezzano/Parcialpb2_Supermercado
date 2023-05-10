@@ -144,6 +144,22 @@ public class Prueba {
 		
 	}
 	
+	@Test
+	public void ordenarProductosSegunCategoriaEnMismaGondola(){
+		Gondolas gondolaActual = new Gondolas(5);
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.comestible));
+	    gondolaActual.agregarProducto(new Producto(Categoria.bebible));
+
+		gondolaActual.ordenarProductosPorCategoria();
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(0).getCategoria());
+		assertEquals(Categoria.comestible, gondolaActual.getProductos().get(1).getCategoria());
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(2).getCategoria());
+		assertEquals(Categoria.bebible, gondolaActual.getProductos().get(3).getCategoria());
+
+		 
+	}
 	
 	
 	@Test

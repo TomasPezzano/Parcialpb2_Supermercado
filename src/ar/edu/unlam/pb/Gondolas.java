@@ -1,6 +1,8 @@
 package ar.edu.unlam.pb;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Gondolas {
 	private Integer id;
@@ -32,7 +34,11 @@ public class Gondolas {
 	public Integer getCANTIDAD_MAXIMA_DE_PRODUCTOS() {
 		return CANTIDAD_MAXIMA_DE_PRODUCTOS;
 	}
-
+	
+	  public void agregarProducto(Producto producto) {
+	        productos.add(producto);
+	    }
+	
 	public static int recuentoDeProductos(ArrayList<Producto> productos){
 		int contador = 0;
 		
@@ -43,4 +49,14 @@ public class Gondolas {
 		return contador;
 		
 	}
+	
+	public void ordenarProductosPorCategoria() {
+        Collections.sort(productos, new Comparator<Producto>() {
+            @Override
+            public int compare(Producto primerProducto, Producto segundoProducto) {
+                return primerProducto.getCategoria().compareTo(segundoProducto.getCategoria());
+            }
+        });
+    }
+	
 }
