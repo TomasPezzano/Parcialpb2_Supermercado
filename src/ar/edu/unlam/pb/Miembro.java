@@ -5,7 +5,7 @@ public abstract class Miembro {
 	private String fecha;
 	private int dni;
 	private Double saldo;
-	private final Boolean TARJETA_MIEMBRO=true;
+	private Boolean miembroPremium;
 	
 	public Miembro(String nombre, String fecha, int dni, Double saldo){
 		this.nombre = nombre;
@@ -46,7 +46,13 @@ public abstract class Miembro {
 		this.saldo = saldo;
 	}
 
-	public Boolean getTARJETA_MIEMBRO() {
-		return TARJETA_MIEMBRO;
+	public Boolean getMiembroPremium() {
+		return miembroPremium;
 	}
+
+	public void setMiembroPremium(Boolean miembroPremium) {
+		this.miembroPremium = miembroPremium;
+	}
+
+	
 }
