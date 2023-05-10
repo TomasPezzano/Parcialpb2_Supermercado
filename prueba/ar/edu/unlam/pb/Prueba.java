@@ -171,6 +171,11 @@ public class Prueba {
 		assertEquals(valorEsperado, compra.queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(miembro, producto));
 	}
 	
+	@Test 
+	public void queSePuedaValidarUnDescuentoDeUnProducto() {
+		
+	}
+	
 	
 
 }
