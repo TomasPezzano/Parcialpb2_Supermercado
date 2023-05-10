@@ -60,6 +60,57 @@ public class Compra {
 		}
 		return precioFinal;
 	}
+
+
+
+	public Double validarLaPromocion2x1(Producto producto1, Producto producto2) {
+		Double precioFinal=0.0;
+		if(producto1.getTipoDePromocion() == producto2.getTipoDePromocion()) {
+			if(producto1.getIdentificador()==producto2.getIdentificador()) {
+				precioFinal = producto1.getPrecio();
+			}
+		}
+		return precioFinal;
+	}
+
+
+
+	public boolean validarLaPromocion5X2(ArrayList<Producto>productos) {
+		Promocion tipoPromocionAChequear =productos.get(0).getTipoDePromocion();
+		Integer identificadorAChequear = productos.get(0).getIdentificador();
+		for (Producto producto : productos) {
+			if(!(producto.getTipoDePromocion() == tipoPromocionAChequear) && producto.getIdentificador()== identificadorAChequear) {
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
+	public boolean validarLaPromocion3X2(ArrayList<Producto>productos) {
+		Promocion tipoPromocionAChequear =productos.get(0).getTipoDePromocion();
+		Integer identificadorAChequear = productos.get(0).getIdentificador();
+		for (Producto producto : productos) {
+			if(!(producto.getTipoDePromocion() == tipoPromocionAChequear) && producto.getIdentificador()== identificadorAChequear) {
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
 	
 	
 	

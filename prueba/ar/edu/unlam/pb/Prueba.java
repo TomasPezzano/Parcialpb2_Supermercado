@@ -310,9 +310,85 @@ public class Prueba {
 				compra.queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(miembro, producto));
 	}
 
+
 	@Test
 	public void queSePuedaValidarUnDescuentoDeUnProducto() {
 
 	}
 
+	
+	@Test 
+	public void queSePuedaValidarUnaPromocion() {
+		Double precio = 100.0;
+		Promocion tipoPromocion = Promocion._3x1;
+		Integer identificador=1;
+		
+		Producto producto = new Producto(precio,tipoPromocion,1);
+		
+		Promocion esperada = Promocion._3x1;
+		
+		assertEquals(producto.getTipoDePromocion(), esperada);
+			
+		
+	}
+	
+	@Test
+	public void queSePuedaValidarUnaPromocion2x1() {
+		Promocion tipoPromocion = Promocion._2x1;
+		Producto producto = new Producto(100.0,tipoPromocion,1);
+		Producto producto2 = new Producto(100.0,tipoPromocion,1);
+		Compra compra = new Compra();
+		Double precioFinalEsperado= 100.0;
+		
+		assertEquals(compra.validarLaPromocion2x1(producto,producto2), precioFinalEsperado);
+		
+
+	}
+	
+	@Test
+	public void queSePuedaValidarUnaPromocion5x2() {
+		Promocion tipoPromocion = Promocion._5x2;
+		Producto producto = new Producto(100.0,tipoPromocion,1);
+		Producto producto2 = new Producto(100.0,tipoPromocion,1);
+		Producto producto3 = new Producto(100.0,tipoPromocion,1);
+		Producto producto4 = new Producto(100.0,tipoPromocion,1);
+		Producto producto5 = new Producto(100.0,tipoPromocion,1);
+		ArrayList<Producto>productos= new ArrayList<Producto>();
+		productos.add(producto);
+		productos.add(producto2);
+		productos.add(producto3);
+		productos.add(producto4);
+		productos.add(producto5);
+		
+		Compra compra = new Compra();
+		
+		assertTrue(compra.validarLaPromocion5X2(productos));
+	}
+	
+	@Test
+	public void queSePuedaValidarUnaPromocion3x2() {
+		Promocion tipoPromocion = Promocion._5x2;
+		Producto producto = new Producto(100.0,tipoPromocion,1);
+		Producto producto2 = new Producto(100.0,tipoPromocion,1);
+		Producto producto3 = new Producto(100.0,tipoPromocion,1);
+
+		ArrayList<Producto>productos= new ArrayList<Producto>();
+		productos.add(producto);
+		productos.add(producto2);
+		productos.add(producto3);
+	
+		
+		Compra compra = new Compra();
+		
+		assertTrue(compra.validarLaPromocion3X2(productos));
+	}
+		
+			
+		
+	
 }
+	
+	
+
+
+
