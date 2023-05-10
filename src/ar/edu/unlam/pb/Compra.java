@@ -43,9 +43,8 @@ public class Compra {
 	
 	public Double queSiLaCompraLaRealizaUnMiembroSeHagaUnDescuentoDe10Porciento(MiembroBasico miembro,Producto producto){
 		Double precioFinal=0.0;
-		Double descuentoInicial=10.0;
 		if(!miembro.getMiembroPremium()) {
-			Double descuento=descuentoInicial% producto.getPrecio();
+			Double descuento=producto.getPrecio() * miembro.getDESCUENTO();
 			 precioFinal= producto.getPrecio()-descuento;
 		}
 		return precioFinal;
@@ -53,9 +52,8 @@ public class Compra {
 	
 	public Double queSiLaCompraLaRealizaUnMiembroPremiumSeHagaUnDescuentoDe40Porciento(MiembroPremium miembro,Producto producto){
 		Double precioFinal=0.0;
-		Double descuentoInicial=40.0;
 		if(miembro.getMiembroPremium()) {
-			Double descuento=descuentoInicial % producto.getPrecio();
+			Double descuento=miembro.getDESCUENTO() * producto.getPrecio();
 			 precioFinal= producto.getPrecio()-descuento;
 		}
 		return precioFinal;

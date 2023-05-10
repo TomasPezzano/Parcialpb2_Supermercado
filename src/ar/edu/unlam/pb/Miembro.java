@@ -54,5 +54,12 @@ public abstract class Miembro {
 		this.miembroPremium = miembroPremium;
 	}
 
-	
+	public static boolean sePuedeComprar(double saldo, Producto producto) {
+		if(saldo >= producto.getPrecio()){
+			return true;
+		}
+		else {
+		return false;
+		}
+	}
 }
