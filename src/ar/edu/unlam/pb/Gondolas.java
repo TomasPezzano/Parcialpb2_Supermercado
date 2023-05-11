@@ -85,4 +85,14 @@ public class Gondolas {
         	return false;
         }
     }
+    public boolean volverALlenarLaGondola(int cantidadMaxima, Producto producto) {
+        if (obtenerCantidadProductos() <= cantidadMaxima) {
+            while (obtenerCantidadProductos() < cantidadMaxima) {
+                productos.add(producto);
+            }
+            return true;
+        } else {
+        	return false;
+        }
+    }
 }

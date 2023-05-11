@@ -467,9 +467,19 @@ public class Prueba {
 
 		gondola.descontarProductoDeLaGondola(gondola.getProductos().get(1));
         assertEquals(cantidadDeProductosFinal, gondola.obtenerCantidadProductos());
-
 	}
 	
+	@Test
+	public void queSiLaGondolaTieneCiertaCantidadSeLleneNuevamente() {
+		int productosEsperados = 5;
+		int capacidadMaximaDeLaGondola = 5;
+        Gondolas gondola = new Gondolas();
+        gondola.agregarProducto(new Producto(10.0));
+        gondola.agregarProducto(new Producto(5.0));
+        gondola.volverALlenarLaGondola(capacidadMaximaDeLaGondola, gondola.getProductos().get(0));
+        
+        assertEquals(5, gondola.obtenerCantidadProductos());
+	}
 	
 	@Test
 	public void queSePuedaDarUnVuelto() {
