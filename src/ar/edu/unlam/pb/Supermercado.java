@@ -1,25 +1,29 @@
 package ar.edu.unlam.pb;
 
-import java.time.LocalDate;
+
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 public class Supermercado {
 
 	private String Nombre;
 	private HashSet<Empleado> Personal;
-	private Integer cantidadDeDineroEnCuenta;
+	private LinkedHashSet<Caja> listaDeCajas;
+	private Double cantidadDeDineroEnCuenta;
 	private HashSet<Month> listaDeMesesDondeYaSePagaronLosSueldos;
 	private final Integer LIMITE_DE_ADVERTENCIAS;
 	private final Integer FALTAS_PARA_SUMAR_ADVERTENCIA;
 
 	public Supermercado() {
 		Personal = new HashSet<Empleado>();
+		listaDeCajas = new LinkedHashSet<Caja>();
 		listaDeMesesDondeYaSePagaronLosSueldos = new HashSet<Month>();
 		LIMITE_DE_ADVERTENCIAS = 3;
 		FALTAS_PARA_SUMAR_ADVERTENCIA = 3;
-		cantidadDeDineroEnCuenta = 0;
+		cantidadDeDineroEnCuenta = 0.0;
 	}
 
 	public Supermercado(String Nombre, Integer FALTAS_PARA_SUMAR_ADVERTENCIA, Integer LIMITE_DE_ADVERTENCIAS) {
@@ -27,7 +31,7 @@ public class Supermercado {
 		Personal = new HashSet<Empleado>();
 		this.FALTAS_PARA_SUMAR_ADVERTENCIA = FALTAS_PARA_SUMAR_ADVERTENCIA;
 		this.LIMITE_DE_ADVERTENCIAS = LIMITE_DE_ADVERTENCIAS;
-		cantidadDeDineroEnCuenta = 0;
+		cantidadDeDineroEnCuenta = 0.0;
 	}
 
 	public String getNombre() {
@@ -54,11 +58,11 @@ public class Supermercado {
 		return FALTAS_PARA_SUMAR_ADVERTENCIA;
 	}
 	
-	public Integer getCantidadDeDineroEnCuenta() {
+	public Double getCantidadDeDineroEnCuenta() {
 		return cantidadDeDineroEnCuenta;
 	}
 
-	public void setCantidadDeDineroEnCuenta(Integer cantidadDeDineroEnCuenta) {
+	public void setCantidadDeDineroEnCuenta(Double cantidadDeDineroEnCuenta) {
 		this.cantidadDeDineroEnCuenta = cantidadDeDineroEnCuenta;
 	}
 
@@ -112,7 +116,7 @@ public class Supermercado {
 		return null;
 	}
 
-	public ArrayList<Empleado> buscarEmpleadoPorSueldo(Integer sueldoDeReferencia) {
+	public ArrayList<Empleado> buscarEmpleadoPorSueldo(Double sueldoDeReferencia) {
 		ArrayList<Empleado> listaDeResultados = new ArrayList<Empleado>();
 
 		for (Empleado empleadoActual : Personal) {
@@ -148,14 +152,14 @@ public class Supermercado {
 		return listaDeResultados;
 	}
 	
-	public Integer calcularLosSueldosDeUnMes(Month Mes) {
-		Integer valorTotalDeLosSueldos = 0;
+	public Double calcularLosSueldosDeUnMes(Month Mes) {
+		Double valorTotalDeLosSueldos = 0.0;
 		Boolean debePagarAguinaldo = false;
 		if(Mes == Month.JUNE || Mes == Month.DECEMBER) debePagarAguinaldo = true;
 		
 		if(debePagarAguinaldo) {
 			for(Empleado empleadoActual : Personal) {
-				int cuentaDelEmpleadoActual = 0;
+				Double cuentaDelEmpleadoActual = 0.0;
 				cuentaDelEmpleadoActual = empleadoActual.getSueldo() + empleadoActual.calcularAguinaldo();
 				valorTotalDeLosSueldos +=cuentaDelEmpleadoActual;
 			}	
@@ -174,12 +178,46 @@ public class Supermercado {
 			throw new IllegalArgumentException("Los sueldos de este mes ya fueron pagados");
 		}
 		
+		Double cantidadDeDineroTotalDelSupermercado = getCantidadDeDineroEnCuenta();
+		for(Caja cajaActual : listaDeCajas) {
+			cantidadDeDineroTotalDelSupermercado += cajaActual.getDinero();
+			}
+		
+		if(calcularLosSueldosDeUnMes(Mes) > cantidadDeDineroTotalDelSupermercado) {
+			throw new IllegalArgumentException("No hay dinero suficiente para efectuar los pagos automáticos");
+		}
+		
+		if(cantidadDeDineroEnCuenta < calcularLosSueldosDeUnMes(Mes)) {
+			Double dineroATransferirPorCadaCaja = calcularLosSueldosDeUnMes(Mes)/getCantidadDeCajas();
+			Double dineroFaltante = 0.0;
+			for(Caja cajaActual : listaDeCajas) {
+				if(cajaActual.getDinero() < dineroATransferirPorCadaCaja){
+					dineroFaltante += (dineroATransferirPorCadaCaja - cajaActual.getDinero());
+				}
+				transferirACuentaSupermercado(cajaActual, dineroATransferirPorCadaCaja);
+			}
+			
+			Iterator<Caja> iterador = listaDeCajas.iterator();
+			while(iterador.hasNext() && dineroFaltante != 0.0){
+				Caja cajaActual = iterador.next();
+				if(cajaActual.getDinero() < dineroFaltante) {
+					Double dineroTransferido = cajaActual.getDinero();
+					transferirACuentaSupermercado(cajaActual, dineroFaltante);
+					dineroFaltante -= dineroTransferido;
+				}
+				else{
+					transferirACuentaSupermercado(cajaActual, dineroFaltante);
+					dineroFaltante = 0.0;
+				}
+			}
+		}
+		
 		Boolean debePagarAguinaldo = false;
 		if(Mes == Month.JUNE || Mes == Month.DECEMBER) debePagarAguinaldo = true;
 		
 		if(debePagarAguinaldo) {
 			for(Empleado empleadoActual : Personal) {
-				int cuentaDelEmpleadoActual = 0;
+				Double cuentaDelEmpleadoActual = 0.0;
 				cuentaDelEmpleadoActual = empleadoActual.getSueldo() + empleadoActual.calcularAguinaldo();
 				transferir(empleadoActual, cuentaDelEmpleadoActual);
 			}	
@@ -197,12 +235,56 @@ public class Supermercado {
 		return true;
 	}
 
-	private void transferir(Empleado empleado, int dineroATransferir) {
-		int saldoDelEmpleado = empleado.getCantidadDeDineroEnCuentaSueldo();
+	private void transferir(Empleado empleado, Double dineroATransferir) {
+		Double saldoDelEmpleado = empleado.getCantidadDeDineroEnCuentaSueldo();
 		saldoDelEmpleado += dineroATransferir;
 		cantidadDeDineroEnCuenta -=dineroATransferir;
 		empleado.setCantidadDeDineroEnCuentaSueldo(saldoDelEmpleado);
+	}
+	
+	public void transferirACuentaSupermercado(Caja caja, Double dineroATransferir) {
+		Double dineroDeLaCaja = caja.getDinero();
 		
+		if(dineroDeLaCaja>=dineroATransferir) {
+			dineroDeLaCaja -= dineroATransferir;
+			cantidadDeDineroEnCuenta += dineroATransferir;
+			caja.setDinero(dineroDeLaCaja);
+		}
+		else {
+			cantidadDeDineroEnCuenta += dineroDeLaCaja;
+			caja.setDinero(0.0);
+		}
+		
+	}
+
+	public boolean agregarCaja(Caja cajaNueva) {
+		cajaNueva.setId(listaDeCajas.size() + 1);
+		return listaDeCajas.add(cajaNueva);
+	}
+	
+	public boolean eliminarCaja(Integer numeroDeCajaDeReferencia) {
+		for(Caja cajaActual : listaDeCajas) {
+			if(cajaActual.getId()==numeroDeCajaDeReferencia) {
+				transferirACuentaSupermercado(cajaActual, cajaActual.getDinero());
+				listaDeCajas.remove(cajaActual);
+				renombrarCajas();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void renombrarCajas(){
+		Integer numeroDeCaja = 1;
+		
+		for(Caja cajaActual : listaDeCajas) {
+			cajaActual.setId(numeroDeCaja);
+			numeroDeCaja++;
+		}
+	}
+
+	public Integer getCantidadDeCajas() {
+		return listaDeCajas.size();
 	}
 
 }
