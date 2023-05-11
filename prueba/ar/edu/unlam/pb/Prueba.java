@@ -593,15 +593,26 @@ public class Prueba {
 	public void queElClientePuedaComprarUnProducto() {
 		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
 		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
-		Compra compraActual = new Compra();
 		Producto productoActual = new Producto(50.0);
 
 		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
 		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
 	}
 
+	public void queSeSumeElPrecioDeTodosLosProductos() {
+		double precioFinalActual = 93.0;
+		ArrayList<Producto> gondola = new ArrayList<>();
+        gondola.add(new Producto(50.0));
+        gondola.add(new Producto(32.0));
+        gondola.add(new Producto(11.0));
+        
+        double precioFinalPrueba = Gondolas.sumaDelPrecioDeLosProductos(gondola);
+        
+		assertEquals(precioFinalPrueba, precioFinalActual, 0);
+	}
+
 	@Test
-	public void queSePuedaHacerUnRecuentoDeUnaGondola() {
+	public void queSePuedaHacerUnRecuentoDeUnaGondola(){
 		int cantidadDeProductos = 3;
 		ArrayList<Producto> gondola = new ArrayList<>();
 		gondola.add(new Producto());
@@ -639,7 +650,8 @@ public class Prueba {
 	}
 
 	@Test
-	public void ordenarProductosSegunCategoriaEnMismaGondola() {
+	public void queSePuedaOrdenarProductosSegunCategoriaEnMismaGondola(){
+
 		Gondolas gondolaActual = new Gondolas();
 		gondolaActual.agregarProducto(new Producto(Categoria.comestible));
 		gondolaActual.agregarProducto(new Producto(Categoria.bebible));
@@ -654,6 +666,35 @@ public class Prueba {
 
 	}
 
+	@Test
+	public void queCuandoSeCompreUnProductoEsteSeDescuenteDeLaGondola(){
+		int cantidadDeProductosFinal = 2;
+		Gondolas gondola = new Gondolas();
+		MiembroBasico miembro = new MiembroBasico(null, null, 0, 26.0);
+		
+		gondola.agregarProducto(new Producto(50.0));
+		gondola.agregarProducto(new Producto(25.0));
+		gondola.agregarProducto(new Producto(10.0));
+				
+		Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1));
+		assertTrue(Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1)));
+
+		gondola.descontarProductoDeLaGondola(gondola.getProductos().get(1));
+        assertEquals(cantidadDeProductosFinal, gondola.obtenerCantidadProductos());
+	}
+	
+	@Test
+	public void queSiLaGondolaTieneCiertaCantidadSeLleneNuevamente() {
+		int productosEsperados = 5;
+		int capacidadMaximaDeLaGondola = 5;
+        Gondolas gondola = new Gondolas();
+        gondola.agregarProducto(new Producto(10.0));
+        gondola.agregarProducto(new Producto(5.0));
+        gondola.volverALlenarLaGondola(capacidadMaximaDeLaGondola, gondola.getProductos().get(0));
+        
+        assertEquals(5, gondola.obtenerCantidadProductos());
+	}
+	
 	@Test
 	public void queSePuedaDarUnVuelto() {
 		String Nombre = "Juan";
