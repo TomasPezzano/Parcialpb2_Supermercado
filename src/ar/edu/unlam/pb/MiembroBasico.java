@@ -8,6 +8,11 @@ public class MiembroBasico extends Miembro {
 		super(nombre,fecha,dni,saldo);
 		super.setMiembroPremium(false);
 	}
+	
+	public MiembroBasico(String nombre, String fecha, int dni) {
+		super(nombre,fecha,dni);
+		super.setMiembroPremium(false);
+	}
 
 	public Double getDESCUENTO() {
 		return DESCUENTO;

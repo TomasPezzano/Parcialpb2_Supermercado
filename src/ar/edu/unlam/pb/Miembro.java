@@ -7,6 +7,13 @@ public abstract class Miembro {
 	private Double saldo;
 	private Boolean miembroPremium;
 	
+	public Miembro(String nombre, String fecha, int dni){
+		this.nombre = nombre;
+		this.fecha = fecha;
+		this.dni = dni;
+		this.saldo = 0.0;
+	}
+	
 	public Miembro(String nombre, String fecha, int dni, Double saldo){
 		this.nombre = nombre;
 		this.fecha = fecha;

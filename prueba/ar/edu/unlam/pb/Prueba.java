@@ -324,8 +324,6 @@ public class Prueba {
 
 	@Test
 	public void queNoSePuedaPagarDosVecesLosSueldosDeUnMismoMes() {
-		thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Los sueldos de este mes ya fueron pagados");
 		
 		Supermercado supermercado = new Supermercado();
 		String Nombre = "Apu";
@@ -340,8 +338,8 @@ public class Prueba {
 		supermercado.agregarEmpleado(empleado);
 		Month Mes = Month.APRIL;
 		supermercado.setCantidadDeDineroEnCuenta(supermercado.calcularLosSueldosDeUnMes(Mes));
-		supermercado.pagarLosSueldos(Mes);
-		supermercado.pagarLosSueldos(Mes);
+		assertTrue(supermercado.pagarLosSueldos(Mes));
+		assertFalse(supermercado.pagarLosSueldos(Mes));
 	}
 
 	@Test
@@ -362,12 +360,8 @@ public class Prueba {
 
 	@Test
 	public void queSeCreeUnaGondola() {
-
-	}
-
-	@Test
-	public void queSeCreeUnDistribuidor() {
-
+		Gondolas gondola = new Gondolas();
+		assertNotNull(gondola);
 	}
 
 	@Test
@@ -544,8 +538,6 @@ public class Prueba {
 
 	@Test
 	public void queNoSePuedaPagarSueldosSiNoHayDineroSuficienteNiEnCuentaNiEnLasCajas() {
-		thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("No hay dinero suficiente para efectuar los pagos automáticos");
 		
 		Supermercado supermercado = new Supermercado();
 		Caja caja1 = new Caja();
@@ -575,12 +567,7 @@ public class Prueba {
 		Double cantidadDeDineroEsperadaParaCajasUnoTresYCuatro = 0.0;
 		Double cantidadDeDineroEsperadaParaCajaDos = 7000.0;
 
-		assertTrue(supermercado.pagarLosSueldos(Mes));
-		assertEquals(Sueldo, empleado.getCantidadDeDineroEnCuentaSueldo());
-		assertEquals(cantidadDeDineroEsperadaParaCajasUnoTresYCuatro, caja1.getDinero());
-		assertEquals(cantidadDeDineroEsperadaParaCajaDos, caja2.getDinero());
-		assertEquals(cantidadDeDineroEsperadaParaCajasUnoTresYCuatro, caja3.getDinero());
-		assertEquals(cantidadDeDineroEsperadaParaCajasUnoTresYCuatro, caja3.getDinero());
+		assertFalse(supermercado.pagarLosSueldos(Mes));
 	}
 
 	@Test
@@ -745,11 +732,6 @@ public class Prueba {
 	}
 
 	@Test
-	public void queSePuedaValidarUnDescuentoDeUnProducto() {
-
-	}
-
-	@Test
 	public void queSePuedaValidarUnaPromocion() {
 		Double precio = 100.0;
 		Promocion tipoPromocion = Promocion._3x1;
@@ -810,5 +792,21 @@ public class Prueba {
 		Compra compra = new Compra();
 
 		assertTrue(compra.validarLaPromocion3X2(productos));
+	}
+	
+	@Test
+	public void queSeCobreLaSubscripcionALosMiembrosPremium(){
+		Supermercado supermercado = new Supermercado();
+		Double valorSubscripcion = 20000.0;
+		MiembroPremium miembro = new MiembroPremium("", "", 0, valorSubscripcion, valorSubscripcion);
+		supermercado.agregarMiembroPremium(miembro);
+		Month Mes = Month.APRIL;
+		
+		Double saldoEsperadoParaMiembro = 0.0;
+		Double saldoEsperadoParaSupermercado = 20000.0;
+		
+		assertTrue(supermercado.cobrarLasSubscripcionesPremium(Mes));
+		assertEquals(miembro.getSaldo(), saldoEsperadoParaMiembro);
+		assertEquals(supermercado.getCantidadDeDineroEnCuenta(), saldoEsperadoParaSupermercado);
 	}
 }
