@@ -1,7 +1,5 @@
 package ar.edu.unlam.pb;
 
-import java.util.ArrayList;
-
 public class Producto {
 
 	private Double precio;
@@ -55,7 +53,5 @@ public class Producto {
 			
 		}
 
-		
-		
 	}
 

@@ -5,19 +5,19 @@ import java.util.Objects;
 public class Empleado {
 	private String Nombre;
 	private String Dni;
-	private Integer Sueldo;
+	private Double Sueldo;
 	private Integer cantidadDeFaltas;
 	private Integer cantidadDeAdvertencias;
-	private Integer cantidadDeDineroEnCuentaSueldo;
+	private Double cantidadDeDineroEnCuentaSueldo;
 
-	public Empleado(String Nombre, String Dni, Integer Sueldo) {
+	public Empleado(String Nombre, String Dni, Double Sueldo) {
 		if(validarDni(Dni)) {
 			this.Dni=Dni;
 			this.Nombre=Nombre;
 			this.Sueldo=Sueldo;
 			cantidadDeFaltas=0;
 			cantidadDeAdvertencias=0;	
-			cantidadDeDineroEnCuentaSueldo=0;
+			cantidadDeDineroEnCuentaSueldo=0.0;
 	}
 	else throw new IllegalArgumentException("El DNI ingresado no es válido");
 	}
@@ -55,11 +55,11 @@ public class Empleado {
 		Dni = dni;
 	}
 	
-	public Integer getSueldo() {
+	public Double getSueldo() {
 		return Sueldo;
 	}
 
-	public void setSueldo(Integer sueldo) {
+	public void setSueldo(Double sueldo) {
 		Sueldo = sueldo;
 	}
 
@@ -81,15 +81,15 @@ public class Empleado {
 		this.cantidadDeAdvertencias = cantidadDeAdvertencias;
 	}
 	
-	public Integer getCantidadDeDineroEnCuentaSueldo() {
+	public Double getCantidadDeDineroEnCuentaSueldo() {
 		return cantidadDeDineroEnCuentaSueldo;
 	}
 
-	public void setCantidadDeDineroEnCuentaSueldo(Integer cantidadDeDineroEnCuentaSueldo) {
+	public void setCantidadDeDineroEnCuentaSueldo(Double cantidadDeDineroEnCuentaSueldo) {
 		this.cantidadDeDineroEnCuentaSueldo = cantidadDeDineroEnCuentaSueldo;
 	}
 	
-	public int calcularAguinaldo() {
+	public Double calcularAguinaldo() {
 		return Sueldo/2;
 	}
 	
