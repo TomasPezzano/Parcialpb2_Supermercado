@@ -46,6 +46,17 @@ public class Gondolas {
         return recuentoDeProductos(productos);
     }
     
+	public static int sumaDelPrecioDeLosProductos(ArrayList<Producto> productos){
+		int precioTotal = 0;
+		
+		for(Producto gondola : productos) {
+			precioTotal += gondola.getPrecio();
+		}
+		
+		return precioTotal;
+		
+	}
+    
 	public void ordenarProductosPorCategoria() {
         Collections.sort(productos, new Comparator<Producto>() {
             @Override
@@ -64,5 +75,24 @@ public class Gondolas {
 
         return cantidadTotal;
     }
-	
+    
+    public boolean descontarProductoDeLaGondola(Producto producto) {
+        if (productos.contains(producto)) {
+            productos.remove(producto);
+            return true;
+        }
+        else {
+        	return false;
+        }
+    }
+    public boolean volverALlenarLaGondola(int cantidadMaxima, Producto producto) {
+        if (obtenerCantidadProductos() <= cantidadMaxima) {
+            while (obtenerCantidadProductos() < cantidadMaxima) {
+                productos.add(producto);
+            }
+            return true;
+        } else {
+        	return false;
+        }
+    }
 }

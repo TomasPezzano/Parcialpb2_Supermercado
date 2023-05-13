@@ -5,14 +5,8 @@ public class Caja {
 	private Double dinero;
 	private Integer id;
 	
-	
-	public Caja(Integer id) {
-		this.dinero=0.0;
-		this.id=id;
-	}
-	
 	public Caja() {
-		
+		this.dinero=0.0;
 	}
 
 	public Double getDinero() {
