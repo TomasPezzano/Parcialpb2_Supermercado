@@ -54,8 +54,8 @@ public abstract class Miembro {
 		this.miembroPremium = miembroPremium;
 	}
 
-	public static boolean sePuedeComprar(double saldo, Producto producto) {
-		if(saldo >= producto.getPrecio()){
+	public static boolean sePuedeComprar(Miembro miembro, Producto producto, Caja caja) {
+		if(miembro.getSaldo() >= producto.getPrecio() && caja.getEstaActiva() == true){
 			return true;
 		}
 		else {

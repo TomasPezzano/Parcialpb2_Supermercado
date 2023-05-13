@@ -591,12 +591,13 @@ public class Prueba {
 
 	@Test
 	public void queElClientePuedaComprarUnProducto() {
+		Caja caja = new Caja();
 		MiembroBasico miembroBasicoActual = new MiembroBasico("", "", 0, 50.0);
 		MiembroPremium miembroPremiumActual = new MiembroPremium("", "", 0, 25.55);
 		Producto productoActual = new Producto(50.0);
 
-		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual.getSaldo(), productoActual));
-		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual.getSaldo(), productoActual));
+		assertTrue(Miembro.sePuedeComprar(miembroBasicoActual, productoActual, caja));
+		assertFalse(Miembro.sePuedeComprar(miembroPremiumActual, productoActual, caja));
 	}
 
 	public void queSeSumeElPrecioDeTodosLosProductos() {
@@ -669,6 +670,7 @@ public class Prueba {
 	@Test
 	public void queCuandoSeCompreUnProductoEsteSeDescuenteDeLaGondola(){
 		int cantidadDeProductosFinal = 2;
+		Caja caja = new Caja();
 		Gondolas gondola = new Gondolas();
 		MiembroBasico miembro = new MiembroBasico(null, null, 0, 26.0);
 		
@@ -676,8 +678,8 @@ public class Prueba {
 		gondola.agregarProducto(new Producto(25.0));
 		gondola.agregarProducto(new Producto(10.0));
 				
-		Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1));
-		assertTrue(Miembro.sePuedeComprar(miembro.getSaldo(), gondola.getProductos().get(1)));
+		Miembro.sePuedeComprar(miembro, gondola.getProductos().get(1), caja);
+		assertTrue(Miembro.sePuedeComprar(miembro, gondola.getProductos().get(1), caja));
 
 		gondola.descontarProductoDeLaGondola(gondola.getProductos().get(1));
         assertEquals(cantidadDeProductosFinal, gondola.obtenerCantidadProductos());
@@ -692,7 +694,7 @@ public class Prueba {
         gondola.agregarProducto(new Producto(5.0));
         gondola.volverALlenarLaGondola(capacidadMaximaDeLaGondola, gondola.getProductos().get(0));
         
-        assertEquals(5, gondola.obtenerCantidadProductos());
+        assertEquals(productosEsperados, gondola.obtenerCantidadProductos());
 	}
 	
 	@Test
@@ -810,5 +812,18 @@ public class Prueba {
 		Compra compra = new Compra();
 
 		assertTrue(compra.validarLaPromocion3X2(productos));
+	}
+	
+	@Test
+	public void queSiLaCajaEstaInactivaNoSePuedaComprar() {		
+		Caja caja = new Caja();
+		MiembroBasico miembro = new MiembroBasico(null, null, 0, 50.0);
+		Producto producto = new Producto(50.0);
+		caja.setEstaActiva(false);
+		
+		assertFalse(Miembro.sePuedeComprar(miembro, producto, caja));
+		
+		
+		
 	}
 }
