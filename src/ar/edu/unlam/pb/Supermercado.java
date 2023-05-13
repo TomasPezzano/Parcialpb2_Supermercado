@@ -4,8 +4,10 @@ package ar.edu.unlam.pb;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+
 
 public class Supermercado {
 
@@ -14,8 +16,11 @@ public class Supermercado {
 	private LinkedHashSet<Caja> listaDeCajas;
 	private Double cantidadDeDineroEnCuenta;
 	private HashSet<Month> listaDeMesesDondeYaSePagaronLosSueldos;
+	private HashSet<MiembroPremium>listaDeMiembrosPremium;
+	private HashSet<MiembroBasico>listaDeMiembrosBasico;
 	private final Integer LIMITE_DE_ADVERTENCIAS;
 	private final Integer FALTAS_PARA_SUMAR_ADVERTENCIA;
+
 
 	public Supermercado() {
 		Personal = new HashSet<Empleado>();
@@ -23,6 +28,11 @@ public class Supermercado {
 		listaDeMesesDondeYaSePagaronLosSueldos = new HashSet<Month>();
 		LIMITE_DE_ADVERTENCIAS = 3;
 		FALTAS_PARA_SUMAR_ADVERTENCIA = 3;
+
+		cantidadDeDineroEnCuenta = 0.0;
+		this.listaDeMiembrosBasico=new HashSet<MiembroBasico>();
+		this.listaDeMiembrosPremium=new HashSet<MiembroPremium>();
+
 		cantidadDeDineroEnCuenta = 0.0;
 	}
 
@@ -31,7 +41,13 @@ public class Supermercado {
 		Personal = new HashSet<Empleado>();
 		this.FALTAS_PARA_SUMAR_ADVERTENCIA = FALTAS_PARA_SUMAR_ADVERTENCIA;
 		this.LIMITE_DE_ADVERTENCIAS = LIMITE_DE_ADVERTENCIAS;
+
 		cantidadDeDineroEnCuenta = 0.0;
+		this.listaDeMiembrosBasico=new HashSet<MiembroBasico>();
+		this.listaDeMiembrosPremium=new HashSet<MiembroPremium>();
+
+		cantidadDeDineroEnCuenta = 0.0;
+
 	}
 
 	public String getNombre() {
@@ -68,6 +84,27 @@ public class Supermercado {
 
 	public boolean agregarEmpleado(Empleado empleado) {
 		return Personal.add(empleado);
+	}
+	
+	
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(listaDeMiembrosBasico, listaDeMiembrosPremium);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Supermercado other = (Supermercado) obj;
+		return Objects.equals(listaDeMiembrosBasico, other.listaDeMiembrosBasico)
+				&& Objects.equals(listaDeMiembrosPremium, other.listaDeMiembrosPremium);
 	}
 
 	public int getCantidadDeEmpleados() {
