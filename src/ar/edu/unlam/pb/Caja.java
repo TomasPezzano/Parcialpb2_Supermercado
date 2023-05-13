@@ -4,9 +4,11 @@ public class Caja {
 	
 	private Double dinero;
 	private Integer id;
+	private Boolean estaActiva; 
 	
 	public Caja() {
 		this.dinero=0.0;
+		estaActiva = true;
 	}
 
 	public Double getDinero() {
@@ -23,6 +25,14 @@ public class Caja {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Boolean getEstaActiva() {
+		return estaActiva;
+	}
+
+	public void setEstaActiva(Boolean estaActiva) {
+		this.estaActiva = estaActiva;
 	}
 
 }

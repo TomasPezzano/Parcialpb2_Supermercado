@@ -283,6 +283,17 @@ public class Supermercado {
 		}
 	}
 
+	public void desactivarCaja(Integer id) {
+		buscarCajaPorId(id).setEstaActiva(false);
+	}
+
+	private Caja buscarCajaPorId(Integer id) {
+		for(Caja cajaActual : listaDeCajas) {
+			if(cajaActual.getId()==id) return cajaActual;
+		}
+		return null;
+	}
+
 	public Integer getCantidadDeCajas() {
 		return listaDeCajas.size();
 	}
