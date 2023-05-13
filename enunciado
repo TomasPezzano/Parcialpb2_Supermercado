@@ -1,0 +1,25 @@
+El Kwik-E-Mart de apu está planeando una ampliación y busca desarrollar un nuevo sistema para registrar
+sus empleados, los productos, las transacciones, ofertas,gondolas,distribuidor,caja,clientes.
+
+Ademas quiere desarrollar un sistema de membresia, el cual cuenta con ofertas especiales.
+
+El programa ademas permitirá registrar las faltas de un empleado, al llegar a cierta cantidad el empleado sera
+advertido y podrá ser depedido.
+
+Hace un tiempo hubo problemas con un empleado menor de edad asi que se decidió dejar de contratar personas
+menor de 18 años.
+
+Se necesita llevar el recuento de los productos,saber en que gondolas estan ubicados y su categoria.
+Se desea informar a cerca de un producto en oferta.
+
+Se debe registrar el dinero total dentro de la caja, si esta activa.
+
+
+
+
+
+
+
+
+Se solicita diseñar, codificar y testear las clases principales que permitan atender los requerimientos.
+funcionales del supermercado. 
