@@ -1,25 +1,19 @@
-El Kwik-E-Mart de apu está planeando una ampliación y busca desarrollar un nuevo sistema para registrar
-sus empleados, los productos, las transacciones, ofertas,gondolas,distribuidor,caja,clientes.
+El Kwik-E-Mart de Apu está planeando una ampliación y busca desarrollar un nuevo sistema integral que cubra varios aspectos de su operación. 
+En primer lugar, necesitan un sistema de registro para gestionar a sus empleados, productos, transacciones, ofertas, góndolas, cajas y clientes. 
+Además, desean implementar un programa de membresía que ofrezca beneficios especiales a sus clientes, este esta compuesto por dos tipos
 
-Ademas quiere desarrollar un sistema de membresia, el cual cuenta con ofertas especiales.
+-Miembro base: Son todos los clientes que poseen la tarjeta gratuita, la cual se entrega luego de la primer compra, esta otorga un 10% de descuento a la hora de comprar.
+-Miembro premium: Son aquellos clientes que pagan una suscripción mensual. Como beneficio tienen un 40% de descuento en cada compra.
 
-El programa ademas permitirá registrar las faltas de un empleado, al llegar a cierta cantidad el empleado sera
-advertido y podrá ser depedido.
+Uno de los requisitos importantes es tener un sistema para registrar las faltas de los empleados. Cuando un empleado acumule cierta cantidad de faltas, se le advertirá y podría ser despedido. 
+Esta medida se tomó después de enfrentar problemas con un empleado menor de edad en el pasado, por lo que decidieron dejar de contratar personas menores de 18 años.
+Estos mismos deben recibir su sueldo con un sistema de pagos automático, que tenga en cuenta el pago de los aguinaldos de forma semestral.
 
-Hace un tiempo hubo problemas con un empleado menor de edad asi que se decidió dejar de contratar personas
-menor de 18 años.
+Por otro lado, es necesario llevar un recuento preciso de los productos, su ubicación en las góndolas y su categoría. 
+También se requiere la capacidad de calcular el valor de una compra teniendo en cuenta descuentos y promociones vigentes de los productos. 
 
-Se necesita llevar el recuento de los productos,saber en que gondolas estan ubicados y su categoria.
-Se desea informar a cerca de un producto en oferta.
+Las promociones con las que trabaja el supermercado son 2x1,3x1,5x2;
 
-Se debe registrar el dinero total dentro de la caja, si esta activa.
+Además, se debe mantener un registro actualizado del dinero total en la caja, siempre y cuando esté activa.
 
-
-
-
-
-
-
-
-Se solicita diseñar, codificar y testear las clases principales que permitan atender los requerimientos.
-funcionales del supermercado. 
+En resumen, se solicita diseñar, codificar y probar las clases principales que permitan cumplir con estos requerimientos funcionales del supermercado.
